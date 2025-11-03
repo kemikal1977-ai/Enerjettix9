@@ -1,0 +1,1 @@
+import React from 'react';import {createRoot} from 'react-dom/client';import './index.css';function App(){return(<div style={{padding:24}}><h1 className='neon'>Enerjettix Get-Fit</h1><p>Neon SPA starter.</p><a className='btn p' href='#'>Join</a> <a className='btn o' href='#'>Coach</a></div>);}createRoot(document.getElementById('root')).render(<App/>);
