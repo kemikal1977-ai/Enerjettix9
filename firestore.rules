@@ -1,0 +1,7 @@
+
+rules_version='2'; service cloud.firestore { match /databases/{database}/documents {
+  function authed(){return request.auth!=null;} function admin(){return authed() && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role=='admin';} function coach(){return authed() && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role=='coach';} function self(uid){return authed() && request.auth.uid==uid;}
+  match /users/{uid}{ allow read: if self(uid)||admin(); allow create: if self(uid); allow update: if self(uid); }
+  match /messages/{t}/items/{m}{ allow read, write: if authed(); }
+  match /bookings/{id}{ allow read, create, update: if authed(); }
+}} 
